@@ -1,0 +1,8 @@
+//  Ceci est une fn JADE qui permet de génerer des étoiles bootstrap,
+
+
+mixin montrerNote(note)
+	- for (var i = 1; i <= note; i++)
+		span.glyphicon.glyphicon-star
+	- for (i = note; i < 5; i++)
+		span.glyphicon.glyphicon-star-empty

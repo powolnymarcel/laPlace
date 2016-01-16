@@ -1,67 +1,25 @@
 extends layout
-
+include _includes/fonctionsHTMLpartagee
 block content
 	#banner.page-header
 		.row
 			.col-lg-7
-				h1
-					| laPlace
-					small &nbsp; Trouver des commerces pres de chez vous!
+				h1= headerDeLaPage.titre
+					small &nbsp;#{headerDeLaPage.tagLine}
 	.row
 		.col-xs-12.col-sm-8
 			.row.list-group
-				.col-xs-12.list-group-item
-					h4
-						a(href='/endroit') Smatch
-						small &nbsp;
-							span.glyphicon.glyphicon-star
-							span.glyphicon.glyphicon-star-empty
-							span.glyphicon.glyphicon-star-empty
-							span.glyphicon.glyphicon-star-empty
-							span.glyphicon.glyphicon-star-empty
-						span.badge.pull-right.badge-default 100m
-					p.address Rue du commerce 22, 4630 Soumagne
-					p
-						span.label.label-warning Pains frais
-						| &nbsp;
-						span.label.label-warning Alcool
-						| &nbsp;
-						span.label.label-warning Legumes
-						| &nbsp;
-				.col-xs-12.list-group-item
-					h4
-						a(href='/endroit') Delhaize
-						small &nbsp;
-							span.glyphicon.glyphicon-star
-							span.glyphicon.glyphicon-star
-							span.glyphicon.glyphicon-star
-							span.glyphicon.glyphicon-star
-							span.glyphicon.glyphicon-star-empty
-						span.badge.pull-right.badge-default 200m
-					p.address Rue du commerce 22, 4630 Soumagne
-					p
-						span.label.label-warning Pains frais
-						| &nbsp;
-						span.label.label-warning Alcool
-						| &nbsp;
-						span.label.label-warning Legumes
-						| &nbsp;
-				.col-xs-12.list-group-item
-					h4
-						a(href='/location') Carrefour
-						small &nbsp;
-							span.glyphicon.glyphicon-star
-							span.glyphicon.glyphicon-star
-							span.glyphicon.glyphicon-star-empty
-							span.glyphicon.glyphicon-star-empty
-							span.glyphicon.glyphicon-star-empty
-						span.badge.pull-right.badge-default 250m
-					p.address Rue du commerce 22, 4630 Soumagne
-					p
-						span.label.label-warning Alcool
-						| &nbsp;
-						span.label.label-warning Legumes
-						| &nbsp;
+				each endroit in endroits
+					.col-xs-12.list-group-item
+						h4
+							a(href="/info-endroit")= endroit.nom
+							small &nbsp;
+								+montrerNote(endroit.note)
+							span.badge.pull-right.badge-default= endroit.distance
+						p.address= endroit.adresse
+						p
+							each service in endroit.services
+								span.label.label-warning= service
+								| &nbsp;
 		.col-xs-12.col-sm-4
-			p.lead
-				| A la recherche d'un commerce ? laPlace vous aide à trouver un commerce pres de chez vous.....
+			p.lead= sidebar
