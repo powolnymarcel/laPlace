@@ -1,12 +1,12 @@
-/* GET 'home' page */
+/* Render pour la page Accueil */
 module.exports.listingAccueil = function(req, res){
 	res.render('index', { title: 'Accueil' });
 };
-/* GET 'Location info' page */
+/* Render pour la page information sur l'endroit */
 module.exports.infoEndroit = function(req, res){
 	res.render('index', { title: 'Info endroit ' });
 };
-/* GET 'Add review' page */
+/* Render pour la page ajouter un commentaire */
 module.exports.ajouterCommentaire = function(req, res){
 	res.render('index', { title: 'Ajouter commentaire ' });
 };

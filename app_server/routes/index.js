@@ -1,14 +1,31 @@
+//Declaration d'express
 var express = require('express');
+//Declaration du routeur d'express
 var router = express.Router();
+//Declaration du controleurs en charges pour les endroits
 var ctrlEndroits = require('../controlleurs/endroits');
+//Declaration du controleurs en charges pour les autres pages
 var ctrlAutres = require('../controlleurs/autres');
 
 
-/* Locations pages */
+
+/**
+ *
+ * @description Routing pour les pages liées aux endroits
+ *
+ */
 router.get('/', ctrlEndroits.listingAccueil);
 router.get('/endroit', ctrlEndroits.infoEndroit);
 router.get('/endroit/commentaire/nouveau', ctrlEndroits.ajouterCommentaire);
-/* Other pages */
+
+// ***************************************************************************************
+
+/**
+ *
+ * @description Routing pour les Autres pages
+ *
+ */
+
 router.get('/a-propos', ctrlAutres.aPropos);
 module.exports = router;
 
