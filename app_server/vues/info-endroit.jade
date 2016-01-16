@@ -1,0 +1,84 @@
+extends layout
+
+block content
+	.row.page-header
+		.col-lg-12
+			h1 Smatch
+	.row
+		.col-xs-12.col-md-9
+			.row
+				.col-xs-12.col-sm-6
+					p.rating
+						span.glyphicon.glyphicon-star
+						span.glyphicon.glyphicon-star-empty
+						span.glyphicon.glyphicon-star-empty
+						span.glyphicon.glyphicon-star-empty
+						span.glyphicon.glyphicon-star-empty
+					p Rue du commerce 22, 4630 Soumagne
+					.panel.panel-primary
+						.panel-heading
+							h2.panel-title Heures d'ouverture
+						.panel-body
+							p Lundi - Vendredi : 7:00 - 19:00
+							p Samedi : 8:00 - 17:00
+							p Dimanche : fermé
+					.panel.panel-primary
+						.panel-heading
+							h2.panel-title Produits
+						.panel-body
+							span.label.label-warning
+								span.glyphicon.glyphicon-ok
+								| &nbsp;Pains frais
+							| &nbsp;
+							span.label.label-warning
+								span.glyphicon.glyphicon-ok
+								| &nbsp;Alcool
+							| &nbsp;
+							span.label.label-warning
+								span.glyphicon.glyphicon-ok
+								| &nbsp;Legumes
+							| &nbsp;
+				.col-xs-12.col-sm-6.location-map
+					.panel.panel-primary
+						.panel-heading
+							h2.panel-title Sur la carte
+						.panel-body
+							img.img-responsive.img-rounded(src='http://maps.googleapis.com/maps/api/staticmap?center=51.455041,2.9690884&zoom=17&size=400x350&sensor=false&markers=51.455041,2.9690884&scale=2')
+			.row
+				.col-xs-12
+					.panel.panel-primary.review-panel
+						.panel-heading
+							a.btn.btn-default.pull-right(href='/endroit/commentaire/nouveau') Ajouter un commentaire
+							h2.panel-title Commentaire clients
+						.panel-body.review-container
+							.row
+								.review
+									.well.well-sm.review-header
+										span.rating
+											span.glyphicon.glyphicon-star
+											span.glyphicon.glyphicon-star
+											span.glyphicon.glyphicon-star-empty
+											span.glyphicon.glyphicon-star-empty
+											span.glyphicon.glyphicon-star-empty
+										span.reviewAuthor Poma &nbsp;
+										small.reviewTimestamp 23 janvier 2016
+									.col-xs-12
+										p Magasin vide, peu de produits...
+							.row
+								.review
+									.well.well-sm.review-header
+										span.rating
+											span.glyphicon.glyphicon-star
+											span.glyphicon.glyphicon-star
+											span.glyphicon.glyphicon-star
+											span.glyphicon.glyphicon-star-empty
+											span.glyphicon.glyphicon-star-empty
+										span.reviewAuthor Marta &nbsp;
+										small.reviewTimestamp 23 janvier 2016
+									.col-xs-12
+										p Magasin normal
+		.col-xs-12.col-md-3
+			p.lead
+				| Smatch est sur laPlace car il a été ajouté sur demande d'un client
+			p
+				| Si vous etes aussi allé chez smatch veuillez svp laisser un commentaire positif ou pas en fonction de votre expérience sur place.

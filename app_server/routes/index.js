@@ -14,8 +14,8 @@ var ctrlAutres = require('../controlleurs/autres');
  * @description Routing pour les pages liées aux endroits
  *
  */
-router.get('/', ctrlEndroits.listingAccueil);
-router.get('/endroit', ctrlEndroits.infoEndroit);
+router.get('/', ctrlEndroits.listingAccueilEndroits);
+router.get('/info-endroit', ctrlEndroits.infoEndroit);
 router.get('/endroit/commentaire/nouveau', ctrlEndroits.ajouterCommentaire);
 
 // ***************************************************************************************

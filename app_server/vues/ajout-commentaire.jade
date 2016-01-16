@@ -1,0 +1,28 @@
+extends layout
+
+block content
+	.row.page-header
+		.col-lg-12
+			h1 Commentez Smatch
+	.row
+		.col-xs-12.col-md-6
+			form.form-horizontal(action="/endroit", method="get", role="form")
+				.form-group
+					label.col-xs-10.col-sm-2.control-label(for="nom") Nom
+					.col-xs-12.col-sm-10
+						input#nom.form-control(name="nom")
+				.form-group
+					label.col-xs-10.col-sm-2.control-label(for="note") Note
+					.col-xs-12.col-sm-2
+						select#note.form-control.input-sm(name="note")
+							option 5
+							option 4
+							option 3
+							option 2
+							option 1
+				.form-group
+					label.col-sm-2.control-label(for="commentaire") Commentaire
+					.col-sm-10
+						textarea#commentaire.form-control(name="commentaire", rows="5")
+				button.btn.btn-default.pull-right Ajouter mon commentaire
+		.col-xs-12.col-md-4

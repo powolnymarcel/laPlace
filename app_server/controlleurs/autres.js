@@ -1,4 +1,4 @@
 /* Render pour la page a-propos */
 module.exports.aPropos = function(req, res){
-	res.render('index', { title: 'A propos' });
+	res.render('a-propos', { titre: 'A propos' });
 };
