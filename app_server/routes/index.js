@@ -1,14 +1,16 @@
 var express = require('express');
 var router = express.Router();
-var ctrlPrincipal = require('../controlleurs/principal');
+var ctrlEndroits = require('../controlleurs/endroits');
+var ctrlAutres = require('../controlleurs/autres');
 
 
-
-router.get('/', ctrlPrincipal.index);
+/* Locations pages */
+router.get('/', ctrlEndroits.listingAccueil);
+router.get('/endroit', ctrlEndroits.infoEndroit);
+router.get('/endroit/commentaire/nouveau', ctrlEndroits.ajouterCommentaire);
+/* Other pages */
+router.get('/a-propos', ctrlAutres.aPropos);
 module.exports = router;
-
-
-
 
 
 
