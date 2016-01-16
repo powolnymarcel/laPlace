@@ -1,4 +1,6 @@
-/* Render pour la page Accueil */
+//---------------------------------------------------------------
+/* Render pour la page d'accueil                               */
+//---------------------------------------------------------------
 module.exports.listingAccueilEndroits = function(req, res){
 	res.render('liste-accueil-endroits', {
 		titre: 'laPlace, trouver des commerces proche de chez vous.',
@@ -28,7 +30,9 @@ module.exports.listingAccueilEndroits = function(req, res){
 		}]
 	});
 };
-/* Render pour la page information detaillées sur l'endroit */
+//---------------------------------------------------------------
+/* Render pour la page information detaillées sur l'endroit    */
+//---------------------------------------------------------------
 module.exports.infoEndroit = function(req, res) {
 	res.render('info-endroit', {
 		titre: 'Delhaize',
@@ -77,8 +81,9 @@ module.exports.infoEndroit = function(req, res) {
 	});
 };
 
-
-/* Render pour la page ajouter un commentaire */
+//---------------------------------------------------------------
+/* Render pour la page ajouter un commentaire                   */
+//---------------------------------------------------------------
 module.exports.ajouterCommentaire = function(req, res) {
 	res.render('ajout-commentaire', {
 		titre: 'ajout-commentaire sur l\'endroit,',

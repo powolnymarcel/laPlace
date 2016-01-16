@@ -1,3 +1,6 @@
+//---------------
+/*   Variables */
+//---------------
 //Declaration d'express
 var express = require('express');
 //Declaration du routeur d'express
@@ -8,7 +11,9 @@ var ctrlEndroits = require('../controlleurs/endroits');
 var ctrlAutres = require('../controlleurs/autres');
 
 
-
+//---------------
+/*   ROUTAGE   */
+//---------------
 /**
  *
  * @description Routing pour les pages liées aux endroits
@@ -18,7 +23,6 @@ router.get('/', ctrlEndroits.listingAccueilEndroits);
 router.get('/info-endroit', ctrlEndroits.infoEndroit);
 router.get('/endroit/commentaire/nouveau', ctrlEndroits.ajouterCommentaire);
 
-// ***************************************************************************************
 
 /**
  *
