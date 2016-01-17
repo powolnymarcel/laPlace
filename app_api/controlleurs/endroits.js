@@ -96,7 +96,8 @@ module.exports.endroitsVoir = function(req, res) {
 						"message": "identifiant de l'endroit non trouve"
 					});
 					return;
-				} else if (err) {
+				}
+				else if (err) {
 					console.log(err);
 					sendJsonResponse(res, 404, err);
 					return;

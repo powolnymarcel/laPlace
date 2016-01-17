@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0f1f50e-d2aa-4346-9b2b-4a42b61fbfae" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app.js" afterPath="$PROJECT_DIR$/app.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_api/controlleurs/commentaires.js" afterPath="$PROJECT_DIR$/app_api/controlleurs/commentaires.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_api/controlleurs/endroits.js" afterPath="$PROJECT_DIR$/app_api/controlleurs/endroits.js" />
     </list>
     <ignored path="laPlace.iws" />
@@ -28,17 +28,17 @@
         <entry file="file://$PROJECT_DIR$/app_api/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+              <caret line="22" column="88" selection-start-line="22" selection-start-column="88" selection-end-line="22" selection-end-column="88" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="endroits.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app_api/controlleurs/endroits.js">
+      <file leaf-file-name="commentaires.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app_api/controlleurs/commentaires.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33292535">
-              <caret line="86" column="58" selection-start-line="86" selection-start-column="58" selection-end-line="86" selection-end-column="58" />
+            <state vertical-scroll-proportion="0.29130965">
+              <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
               <folding />
             </state>
           </provider>
@@ -72,10 +72,10 @@
         <option value="$PROJECT_DIR$/app_api/index.js" />
         <option value="$PROJECT_DIR$/app_api/modeles/endroit.js" />
         <option value="$PROJECT_DIR$/app_api/modeles/bdd.js" />
-        <option value="$PROJECT_DIR$/app_api/controlleurs/commentaires.js" />
         <option value="$PROJECT_DIR$/app_api/routes/index.js" />
         <option value="$PROJECT_DIR$/app.js" />
         <option value="$PROJECT_DIR$/app_api/controlleurs/endroits.js" />
+        <option value="$PROJECT_DIR$/app_api/controlleurs/commentaires.js" />
       </list>
     </option>
   </component>
@@ -391,14 +391,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/controlleurs/commentaires.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="58" column="45" selection-start-line="58" selection-start-column="16" selection-end-line="58" selection-end-column="45" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app_api/modeles/endroit.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.5618115">
@@ -439,18 +431,26 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/routes/index.js">
+    <entry file="file://$PROJECT_DIR$/app_api/controlleurs/endroits.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+        <state vertical-scroll-proportion="1.8102815">
+          <caret line="87" column="46" selection-start-line="87" selection-start-column="46" selection-end-line="87" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app_api/controlleurs/endroits.js">
+    <entry file="file://$PROJECT_DIR$/app_api/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33292535">
-          <caret line="86" column="58" selection-start-line="86" selection-start-column="58" selection-end-line="86" selection-end-column="58" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="22" column="88" selection-start-line="22" selection-start-column="88" selection-end-line="22" selection-end-column="88" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app_api/controlleurs/commentaires.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29130965">
+          <caret line="14" column="51" selection-start-line="14" selection-start-column="51" selection-end-line="14" selection-end-column="51" />
           <folding />
         </state>
       </provider>

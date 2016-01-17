@@ -12,7 +12,7 @@ var sendJsonResponse = function(res, status, content) {
 };
 
 //---------------------------------------------------------------
-/*                  CREATION COMMENTAIRE                       */
+/*                  CREATION COMMENTAIRE (4 étapes)            */
 //---------------------------------------------------------------
 module.exports.creationCommentaire = function(req, res) {
 	var endroitsid = req.params.endroitsid;
