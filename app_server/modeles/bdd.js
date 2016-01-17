@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 //Adresse de la bdd, pas besoin de spécifier de port, username et pwd, c'est optionnel.
-var bddURI = 'mongodb://localhost/laPlace';
+var bddURI = 'mongodb://la_place:la_place@ds035995.mongolab.com:35995/la_place';
+
 var fermetureElegante;
 mongoose.connect(bddURI);
 
