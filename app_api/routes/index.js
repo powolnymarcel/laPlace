@@ -5,6 +5,7 @@ var ctrlCommentaires = require('../controlleurs/commentaires');
 
 /*Rappel : app.use('/api', routesApi);*/
 // Donc, les url commencent par /api/
+
 //---------------------------------------------------------------
 /*                 Routes ENDROITS                             */
 //---------------------------------------------------------------

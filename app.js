@@ -1,3 +1,7 @@
+//---------------------------------------------------------------
+/*           Structure de base generée avec EXPRESS            */
+//---------------------------------------------------------------
+
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
