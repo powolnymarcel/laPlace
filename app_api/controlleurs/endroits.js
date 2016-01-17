@@ -16,13 +16,18 @@ var theEarth = (function(){
 	};
 })();
 
+//---------------------------------------------------------------
+/*              Fn pour le status + message                    */
+//---------------------------------------------------------------
 // Permet d'envoyer le code de status et un message
 var sendJsonResponse = function(res, status, content) {
 	res.status(status);
 	res.json(content);
 };
-
-
+//---------------------------------------------------------------
+/*              VOIR ENDROIT PAR DISTANCE                      */
+//---------------------------------------------------------------
+/* GET api/endroits */
 /* Recupère la liste des endroits basés sur la requete de distance */
 module.exports.endroitsListeParDistance = function(req, res) {
 	var lng = parseFloat(req.query.lng);
@@ -73,44 +78,10 @@ var construireLaListeDesEndroits = function(req, res, results, stats) {
 	return endroits;
 };
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-module.exports.creationEndroit = function (req, res) {
-	sendJsonResponse(res, 200, {"status" : "success"});
-};
-module.exports.endroitsUpdate = function (req, res) {
-	sendJsonResponse(res, 200, {"status" : "success"});
-};
-module.exports.endroitsDelete = function (req, res) {
-	sendJsonResponse(res, 200, {"status" : "success"});
-};
+//---------------------------------------------------------------
+/*                  VOIR ENDROIT  PAR ID                       */
+//---------------------------------------------------------------
+/* GET /api/endroits */
 module.exports.endroitsVoir = function(req, res) {
 	console.log('Affichage des details de l\'endroit ID: ', req.params);
 	if (req.params && req.params.endroitsid) {
@@ -136,6 +107,115 @@ module.exports.endroitsVoir = function(req, res) {
 		console.log('Pas d\'endroit spécifié dans la requete');
 		sendJsonResponse(res, 404, {
 			"message": "Pas d'endroit spécifié dans la requete"
+		});
+	}
+};
+//---------------------------------------------------------------
+/*                  CREER ENDROIT                              */
+//---------------------------------------------------------------
+/*POST /api/endroits */
+module.exports.creationEndroit = function(req, res) {
+	Endroit.create({
+		nom: req.body.nom,
+		adresse: req.body.adresse,
+		services: req.body.services.split(","),
+		coords: [parseFloat(req.body.lng), parseFloat(req.body.lat)],
+		heuresOuverture: [{
+			jours: req.body.jours1,
+			ouverture: req.body.ouverture1,
+			fermeture: req.body.fermeture1,
+			ferme: req.body.ferme1,
+		}, {
+			jours: req.body.jours2,
+			ouverture: req.body.ouverture2,
+			fermeture: req.body.fermeture2,
+			ferme: req.body.ferme2,
+		}]
+	}, function(err, endroits) {
+		if (err) {
+			sendJsonResponse(res, 400, err);
+		} else {
+			sendJsonResponse(res, 201, endroits);
+		}
+	});
+};
+
+//---------------------------------------------------------------
+/*                  METTRE A JOUR ENDROIT                      */
+//---------------------------------------------------------------
+/* PUT /api/endroits/:endroitsid */
+module.exports.endroitsUpdate = function(req, res) {
+	if (!req.params.endroitsid) {
+		sendJsonResponse(res, 404, {
+			"message": "Pas trouve, le id de l'endroit est requis"
+		});
+		return;
+	}
+	Endroit
+		.findById(req.params.endroitsid)
+		//Select tous sauf les 2 champs suivants
+		.select('-commentaires -note')
+		.exec(
+			function(err, endroits) {
+				if (!endroits) {
+					sendJsonResponse(res, 404, {
+						"message": "ID endroit non trouve"
+					});
+					return;
+				} else if (err) {
+					sendJsonResponse(res, 400, err);
+					return;
+				}
+				endroits.nom = req.body.nom;
+				endroits.adresse = req.body.adresse;
+				endroits.services = req.body.services.split(",");
+				endroits.coords = [parseFloat(req.body.lng), parseFloat(req.body.lat)];
+				endroits.heuresOuverture = [{
+					jours: req.body.jours1,
+					ouverture: req.body.ouverture1,
+					fermeture: req.body.fermeture1,
+					ferme: req.body.ferme1,
+				}, {
+					jours: req.body.jours2,
+					ouverture: req.body.ouverture2,
+					fermeture: req.body.fermeture2,
+					ferme: req.body.ferme2,
+				}];
+				endroits.save(function(err, endroits) {
+					if (err) {
+						sendJsonResponse(res, 404, err);
+					} else {
+						sendJsonResponse(res, 200, endroits);
+					}
+				});
+			}
+		);
+};
+
+
+//---------------------------------------------------------------
+/*                  DELETE ENDROIT                             */
+//---------------------------------------------------------------
+/* DELETE /api/endroits/:endroitsid */
+module.exports.endroitsDelete = function(req, res) {
+	var endroitsid = req.params.endroitsid;
+	if (endroitsid) {
+		Endroit
+			.findByIdAndRemove(endroitsid)
+			.exec(
+				function(err, endroits) {
+					if (err) {
+						console.log(err);
+						sendJsonResponse(res, 404, err);
+						return;
+					}
+					console.log("ID endroit " + endroitsid + " SUPPRIME !!!");
+					sendJsonResponse(res, 204, null);
+				}
+			);
+	} else {
+		sendJsonResponse(res, 404, {
+			"message": "Pas de ID endroit"
 		});
 	}
 };
