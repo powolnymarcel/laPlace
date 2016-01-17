@@ -84,7 +84,7 @@ var construireLaListeDesEndroits = function(req, res, results, stats) {
 //---------------------------------------------------------------
 /* GET /api/endroits */
 module.exports.endroitsVoir = function(req, res) {
-	console.log('Affichage des details de l\'endroit ID: ', req.params);
+	console.log('Affichage des details de l\'endroit avec ID: ', req.params);
 	if (req.params && req.params.endroitsid) {
 		//Endroit = le modèle Endroit
 		Endroit

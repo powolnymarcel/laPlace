@@ -25,7 +25,7 @@ app.set('view engine', 'jade');
 //---------------------------------------------------------------
 /*                          MIDDLEWARE                         */
 //---------------------------------------------------------------
-// Decommenter apres avoir placé le favicon dans  /public
+// Dé-commenter apres avoir placé le favicon dans  /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
