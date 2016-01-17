@@ -23,7 +23,6 @@ router.get('/', ctrlEndroits.listingAccueilEndroits);
 router.get('/info-endroit', ctrlEndroits.infoEndroit);
 router.get('/endroit/commentaire/nouveau', ctrlEndroits.ajouterCommentaire);
 
-
 /**
  *
  * @description Routing pour les Autres pages
