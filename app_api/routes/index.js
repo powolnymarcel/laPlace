@@ -3,7 +3,8 @@ var router = express.Router();
 var ctrlEndroits = require('../controlleurs/endroits');
 var ctrlCommentaires = require('../controlleurs/commentaires');
 
-
+/*Rappel : app.use('/api', routesApi);*/
+// Donc, les url commencent par /api/
 //---------------------------------------------------------------
 /*                 Routes ENDROITS                             */
 //---------------------------------------------------------------
