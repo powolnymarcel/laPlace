@@ -1,8 +1,9 @@
 var mongoose = require('mongoose');
-//Adresse de la bdd, pas besoin de spécifier de port, username et pwd, c'est optionnel.
+//Adresse de la bdd.
 var bddURI = 'mongodb://la_place:la_place@ds035995.mongolab.com:35995/la_place';
-
+//Permet une deconnexion de la bdd, si je me trompe pas c'est equivalent au closeCursor de PHP
 var fermetureElegante;
+//Connexion à la BDD
 mongoose.connect(bddURI);
 
 
@@ -37,6 +38,7 @@ mongoose.connection.on('disconnected', function () {
 //                                                                         //
 //---------------------------------------------------------------------------
 var readLine = require ("readline");
+//Si la plateforme est sous win32
 if (process.platform === "win32"){
 	var rl = readLine.createInterface ({
 		input: process.stdin,
@@ -84,7 +86,7 @@ process.on('SIGTERM', function() {
 	});
 });
 //---------------------------------------------------------------------------
-//               *******************************                           //
+//                *************FIN**************                           //
 //---------------------------------------------------------------------------
 
 

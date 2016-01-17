@@ -1,11 +1,15 @@
 var mongoose = require('mongoose');
+//Appel du modele "Endroit"
 var Endroit = mongoose.model('Endroit');
 
+//---------------------------------------------------------------
+/*              Fn pour le status + message                    */
+//---------------------------------------------------------------
+// Permet d'envoyer le code de status et un message
 var sendJsonResponse = function(res, status, content) {
 	res.status(status);
 	res.json(content);
 };
-
 
 //---------------------------------------------------------------
 /*                  CREATION COMMENTAIRE                       */

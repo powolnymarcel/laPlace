@@ -4,20 +4,24 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+//Config de la BDD
 require('./app_api/modeles/bdd');
 var port = process.env.PORT || 3000;
-
 var routes = require('./app_server/routes/index');
 var routesApi = require('./app_api/routes/index');
 var users =  require('./app_server/routes/users');
-
 var app = express();
 
-// view engine setup
+//---------------------------------------------------------------
+/*                 Config Moteur de vues                       */
+//---------------------------------------------------------------
 app.set('views', path.join(__dirname,'app_server', 'vues'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
+//---------------------------------------------------------------
+/*                          MIDDLEWARE                         */
+//---------------------------------------------------------------
+// Decommenter apres avoir placé le favicon dans  /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -25,6 +29,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+//---------------------------------------------------------------
+/*                          Routes                             */
+//---------------------------------------------------------------
 app.use('/', routes);
 app.use('/api', routesApi);
 app.use('/users', users);

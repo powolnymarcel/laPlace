@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+//Appel du modele "Endroit"
 var Endroit = mongoose.model('Endroit');
 
-
+//Permet à mongoDB de calculer une distance... Pas vraiment compris...
 var theEarth = (function(){
 	var earthRadius = 6371; // km, miles is 3959
 	var getDistanceFromRads = function(rads) {
@@ -62,7 +63,6 @@ module.exports.endroitsListeParDistance = function(req, res) {
 		}
 	});
 };
-
 var construireLaListeDesEndroits = function(req, res, results, stats) {
 	var endroits = [];
 	results.forEach(function(doc) {
@@ -79,6 +79,7 @@ var construireLaListeDesEndroits = function(req, res, results, stats) {
 };
 
 //---------------------------------------------------------------
+/*                  VOIR ENDROIT  PAR ID                       */
 /*                  VOIR ENDROIT  PAR ID                       */
 //---------------------------------------------------------------
 /* GET /api/endroits */

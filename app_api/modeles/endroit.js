@@ -1,5 +1,9 @@
 var mongoose = require( 'mongoose' );
-
+//---------------------------------------------------------------
+/*                MODELE POUR UN ENDROIT                       */
+/*                Ce document contient :                       */
+/*         schéma de : commentaires,heures,l'endroit           */
+//---------------------------------------------------------------
 var heuresOuvertureSchema = new mongoose.Schema({
 	jours: {type: String, required: true},
 	ouverture: String,
