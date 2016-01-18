@@ -2,6 +2,9 @@ var mongoose = require('mongoose');
 //Appel du modele "Endroit"
 var Endroit = mongoose.model('Endroit');
 
+//Pour permettre à ce controlleur de faire des appels sur l'API
+var request = require('request');
+
 //Permet à mongoDB de calculer une distance... Pas vraiment compris...
 var theEarth = (function(){
 	var earthRadius = 6371; // km, miles is 3959
@@ -148,6 +151,7 @@ module.exports.creationEndroit = function(req, res) {
 //---------------------------------------------------------------
 /* PUT /api/endroits/:endroitsid */
 module.exports.endroitsUpdate = function(req, res) {
+	console.log(req.body);
 	if (!req.params.endroitsid) {
 		sendJsonResponse(res, 404, {
 			"message": "Pas trouve, le id de l'endroit est requis"

@@ -23,6 +23,7 @@ router.get('/', ctrlEndroits.listingAccueilEndroits);
 router.get('/endroits/:endroitsid', ctrlEndroits.infoEndroit);
 router.get('/endroits/ajouter/ajout', ctrlEndroits.ajoutEndroit);
 router.get('/endroits/editer/:endroitsid', ctrlEndroits.editerEndroit);
+router.post('/endroits/editer/:endroitsid/fin', ctrlEndroits.editerEndroitFin);
 router.get('/endroit/commentaire/nouveau', ctrlEndroits.ajouterCommentaire);
 
 /**

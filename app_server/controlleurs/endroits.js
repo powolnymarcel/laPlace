@@ -195,3 +195,30 @@ module.exports.editerEndroit = function(req, res) {
 		}
 	);
 }
+
+
+
+var renderEditFin = function(req, res,responseBody){
+
+	res.render('edit-endroits', {
+		endroits: responseBody
+	});
+};
+module.exports.editerEndroitFin = function(req, res) {
+
+	var requestOptions, path;
+	path = "/api/endroits/" + req.params.endroitsid;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "PUT",
+		json : req.body
+	};
+	request(
+		requestOptions,
+		function(err, response, body) {
+			var data = body;
+			renderEditFin(req, res,data);
+
+		}
+	);
+}
