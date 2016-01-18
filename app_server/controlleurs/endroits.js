@@ -38,6 +38,8 @@ var renderDeLaPageAccueil = function(req, res,responseBody){
 	});
 };
 
+//Va faire un appel GET sur le routeur de l'api, le routeur de l'api va donc recevoir : GET /api/endroits
+//Pour le routeur cela signifie qu'il faut aller dans le Ctrl "ctrlEndroits" et lancer "endroitsListeParDistance"
 module.exports.listingAccueilEndroits = function(req, res){
 	var requestOptions, path;
 	path = '/api/endroits';
@@ -48,7 +50,7 @@ module.exports.listingAccueilEndroits = function(req, res){
 		qs : {
 			lng : 5.723485,
 			lat : 50.627192,
-			maxDistance : 20000000
+			maxDistance : 100000
 		}
 	};
 	request(

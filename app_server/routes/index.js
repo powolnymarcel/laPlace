@@ -20,7 +20,7 @@ var ctrlAutres = require('../controlleurs/autres');
  *
  */
 router.get('/', ctrlEndroits.listingAccueilEndroits);
-router.get('/info-endroit', ctrlEndroits.infoEndroit);
+router.get('/endroits/:endroitsid', ctrlEndroits.infoEndroit);
 router.get('/endroit/commentaire/nouveau', ctrlEndroits.ajouterCommentaire);
 
 /**
