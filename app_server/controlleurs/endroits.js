@@ -50,7 +50,7 @@ module.exports.listingAccueilEndroits = function(req, res){
 		qs : {
 			lng : 5.723485,
 			lat : 50.627192,
-			maxDistance : 100000
+			maxDistance : 2000000
 		}
 	};
 	request(
@@ -81,52 +81,39 @@ module.exports.listingAccueilEndroits = function(req, res){
 //---------------------------------------------------------------
 /* Render pour la page information detaillées sur l'endroit    */
 //---------------------------------------------------------------
-module.exports.infoEndroit = function(req, res) {
+
+var renderDeLaPageDetailsEndsroit = function (req, res,detailsEndroitUnique) {
 	res.render('info-endroit', {
-		titre: 'Delhaize',
+		titre: detailsEndroitUnique.nom,
 		headerDeLaPage: {
-			titre: 'Delhaize'
+			titre: detailsEndroitUnique.nom
 		},
 		sidebar: {
 			texte: 'Se trouve sur laPlace car c est un commerce qui a ete demandé par la communaute',
 			tagline: 'Si vous avez quelque chose à dire sur ce commerce, veuillez le faire via le formulaire.'
 		},
-		endroit: {
-			nom: 'Delhaize',
-			adresse: 'Rue de commerce 34, 4630 Soumagne',
-			note: 2,
-			services: ['pains frais','boissons','legumes'],
-			coords: {
-				lng: 5.736104,
-				lat: 50.632282
-			},
-			heuresOuverture: [{
-				jours: 'Lundi - Vendredi',
-				ouverture: '7:00',
-				fermeture: '19:00',
-				ferme: false
-			}, {
-				jours: 'Samedi',
-				ouverture: '8:00',
-				fermeture: '17:00',
-				ferme: false
-			}, {
-				jours: 'Dimanche',
-				ferme: true
-			}],
-			commentaires: [{
-				auteur: 'Poma',
-				note: 5,
-				temps: '16 janvier 2016',
-				texte: 'Endroit calme et sympathique.'
-			}, {
-				auteur: 'Josette',
-				note: 3,
-				temps: '16 Mars 2019',
-				texte: 'Un magasin quoi...'
-			}]
-		}
+		endroit:detailsEndroitUnique
 	});
+};
+module.exports.infoEndroit = function(req, res){
+	var requestOptions, path;
+	path = "/api/endroits/" + req.params.endroitsid;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "GET",
+		json : {}
+	};
+	request(
+		requestOptions,
+		function(err, response, body) {
+			var data = body;
+			data.coords = {
+				lng : body.coords[0],
+				lat : body.coords[1]
+			};
+			renderDeLaPageDetailsEndsroit(req, res,data);
+		}
+	);
 };
 
 //---------------------------------------------------------------

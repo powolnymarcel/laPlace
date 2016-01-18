@@ -1,5 +1,6 @@
 extends layout
 
+//le include de la mixin pour afficher les etoiles(rating)
 include _includes/fonctionsHTMLpartagee
 
 block content
@@ -50,6 +51,7 @@ block content
 									.review
 										.well.well-sm.review-header
 											span.rating
+												//appel de la MIXIN, elle prend en param la note laissée par l'user
 												+montrerNote(commentaire.note)
 											span.reviewAuthor #{commentaire.auteur}
 											small.reviewTimestamp #{commentaire.temps}

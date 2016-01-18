@@ -40,7 +40,7 @@ module.exports.endroitsListeParDistance = function(req, res) {
 	};
 	var geoOptions = {
 		spherical: true,
-		maxDistance: theEarth.getRadsFromDistance(maxDistance),
+		maxDistance: maxDistance,
 		num: 10
 	};
 	if (!lng || !lat || !maxDistance) {
