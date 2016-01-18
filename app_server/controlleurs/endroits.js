@@ -63,7 +63,7 @@ var renderDeLaPageAccueil = function(req, res,responseBody){
 //Pour le routeur cela signifie qu'il faut aller dans le Ctrl "ctrlEndroits" et lancer "endroitsListeParDistance"
 module.exports.listingAccueilEndroits = function(req, res){
 	var requestOptions, path;
-	path = 'api/endroits';
+	path = '/api/endroits';
 	requestOptions = {
 		url : apiOptions.server + path,
 		method : "GET",

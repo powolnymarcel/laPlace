@@ -19,7 +19,7 @@ var ctrlAutres = require('../controlleurs/autres');
  * @description Routing pour les pages liées aux endroits
  *
  */
-router.get('/', ctrlEndroits.listingAccueilEndroits);
+router.get('', ctrlEndroits.listingAccueilEndroits);
 router.get('/endroits/:endroitsid', ctrlEndroits.infoEndroit);
 router.get('/endroits/ajouter/ajout', ctrlEndroits.ajoutEndroit);
 router.get('/endroits/editer/:endroitsid', ctrlEndroits.editerEndroit);
