@@ -18,6 +18,7 @@ block content
 								+montrerNote(endroit.note)
 							span.badge.pull-right.badge-default= endroit.distance
 						p.address= endroit.adresse
+						a.pull-right(href="/endroits/editer/#{endroit._id}") Editer
 						p
 							each service in endroit.services
 								span.label.label-warning= service

@@ -21,6 +21,8 @@ var ctrlAutres = require('../controlleurs/autres');
  */
 router.get('/', ctrlEndroits.listingAccueilEndroits);
 router.get('/endroits/:endroitsid', ctrlEndroits.infoEndroit);
+router.get('/endroits/ajouter/ajout', ctrlEndroits.ajoutEndroit);
+router.get('/endroits/editer/:endroitsid', ctrlEndroits.editerEndroit);
 router.get('/endroit/commentaire/nouveau', ctrlEndroits.ajouterCommentaire);
 
 /**

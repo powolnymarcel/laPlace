@@ -1,5 +1,26 @@
 //Pour permettre à ce controlleur de faire des appels sur l'API
 var request = require('request');
+
+
+var _montrerErreur = function (req, res, status) {
+	var titre, contenu;
+	if (status === 404) {
+		titre = "404, pag non trouvee";
+		contenu = "Nous ne sommes pas en mesure de trouver la page demandée. Verifier votre lien internet.";
+	} else {
+		titre = status + ", une erreur s'est produite.";
+		contenu = "Quelque chose, quelque part a mal fonctionné";
+	}
+	res.status(status);
+	res.render('erreurSurLeSite', {
+		titre : titre,
+		contenu : contenu
+	});
+};
+
+
+
+
 //Pour savoir si on travaille en local ou sur l'hebergeur
 var apiOptions = {
 	server : "http://localhost:3000"
@@ -107,11 +128,17 @@ module.exports.infoEndroit = function(req, res){
 		requestOptions,
 		function(err, response, body) {
 			var data = body;
+			//Si l'endroit est trouve donc un code 200
+			if (response.statusCode === 200) {
 			data.coords = {
 				lng : body.coords[0],
 				lat : body.coords[1]
 			};
 			renderDeLaPageDetailsEndsroit(req, res,data);
+			} else {
+				//Sinon, afficher erreur en fonction du code erreur
+				_montrerErreur(req, res, response.statusCode);
+			}
 		}
 	);
 };
@@ -127,3 +154,44 @@ module.exports.ajouterCommentaire = function(req, res) {
 		}
 	});
 };
+
+
+module.exports.ajoutEndroit = function(req, res) {
+	res.render('ajout-endroit', {
+		titre: 'ajout-endroit',
+		headerDeLaPage: {
+			titre: 'ajout endroit'
+		}
+	});
+}
+
+
+
+
+
+
+
+
+var renderEdit = function(req, res,responseBody){
+
+	res.render('edit-endroits', {
+		endroits: responseBody
+	});
+};
+module.exports.editerEndroit = function(req, res) {
+	var requestOptions, path;
+	path = "/api/endroits/" + req.params.endroitsid;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "GET",
+		json : {}
+	};
+	request(
+		requestOptions,
+		function(err, response, body) {
+			var data = body;
+				renderEdit(req, res,data);
+
+		}
+	);
+}

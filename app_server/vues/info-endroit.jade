@@ -54,7 +54,8 @@ block content
 												//appel de la MIXIN, elle prend en param la note laissée par l'user
 												+montrerNote(commentaire.note)
 											span.reviewAuthor #{commentaire.auteur}
-											small.reviewTimestamp #{commentaire.temps}
+											small.reviewTimestamp
+												+formatDate(commentaire.temps)
 										.col-xs-12
 											p !{(commentaire.texte).replace(/\n/g, '<br/>')}
 		.col-xs-12.col-md-3
