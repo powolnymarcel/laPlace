@@ -66,8 +66,9 @@ module.exports.endroitsListeParDistance = function(req, res) {
 var construireLaListeDesEndroits = function(req, res, results, stats) {
 	var endroits = [];
 	results.forEach(function(doc) {
+
 		endroits.push({
-			distance: theEarth.getDistanceFromRads(doc.dis),
+			distance: doc.dis,
 			nom: doc.obj.nom,
 			adresse: doc.obj.adresse,
 			note: doc.obj.note,
