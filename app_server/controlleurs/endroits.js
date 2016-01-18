@@ -63,7 +63,7 @@ var renderDeLaPageAccueil = function(req, res,responseBody){
 //Pour le routeur cela signifie qu'il faut aller dans le Ctrl "ctrlEndroits" et lancer "endroitsListeParDistance"
 module.exports.listingAccueilEndroits = function(req, res){
 	var requestOptions, path;
-	path = 'api/endroits';
+	path = '/api/endroits';
 	requestOptions = {
 		url : apiOptions.server + path,
 		method : "GET",
@@ -118,7 +118,7 @@ var renderDeLaPageDetailsEndsroit = function (req, res,detailsEndroitUnique) {
 };
 module.exports.infoEndroit = function(req, res){
 	var requestOptions, path;
-	path = "api/endroits/" + req.params.endroitsid;
+	path = "/api/endroits/" + req.params.endroitsid;
 	requestOptions = {
 		url : apiOptions.server + path,
 		method : "GET",
@@ -180,7 +180,7 @@ var renderEdit = function(req, res,responseBody){
 };
 module.exports.editerEndroit = function(req, res) {
 	var requestOptions, path;
-	path = "api/endroits/" + req.params.endroitsid;
+	path = "/api/endroits/" + req.params.endroitsid;
 	requestOptions = {
 		url : apiOptions.server + path,
 		method : "GET",
