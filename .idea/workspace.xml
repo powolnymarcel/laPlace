@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b0f1f50e-d2aa-4346-9b2b-4a42b61fbfae" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_api/controlleurs/endroits.js" afterPath="$PROJECT_DIR$/app_api/controlleurs/endroits.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_api/routes/index.js" afterPath="$PROJECT_DIR$/app_api/routes/index.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/controlleurs/endroits.js" afterPath="$PROJECT_DIR$/app_server/controlleurs/endroits.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/routes/index.js" afterPath="$PROJECT_DIR$/app_server/routes/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/vues/ajout-commentaire.jade" afterPath="$PROJECT_DIR$/app_server/vues/ajout-commentaire.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/vues/edit-endroits.jade" afterPath="$PROJECT_DIR$/app_server/vues/edit-endroits.jade" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app_server/vues/info-endroit.jade" afterPath="$PROJECT_DIR$/app_server/vues/info-endroit.jade" />
     </list>
     <ignored path="laPlace.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -33,7 +27,7 @@
         <entry file="file://$PROJECT_DIR$/app_server/routes/index.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
+              <caret line="27" column="95" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="95" />
               <folding />
             </state>
           </provider>
@@ -42,8 +36,8 @@
       <file leaf-file-name="endroits.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app_server/controlleurs/endroits.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-2.5593636">
-              <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+            <state vertical-scroll-proportion="0.45899633">
+              <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -611,15 +605,15 @@
     <entry file="file://$PROJECT_DIR$/app_server/routes/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="27" column="70" selection-start-line="27" selection-start-column="70" selection-end-line="27" selection-end-column="70" />
+          <caret line="27" column="95" selection-start-line="27" selection-start-column="71" selection-end-line="27" selection-end-column="95" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app_server/controlleurs/endroits.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5593636">
-          <caret line="30" column="18" selection-start-line="30" selection-start-column="18" selection-end-line="30" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.45899633">
+          <caret line="187" column="0" selection-start-line="187" selection-start-column="0" selection-end-line="187" selection-end-column="0" />
           <folding />
         </state>
       </provider>

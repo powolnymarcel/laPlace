@@ -181,7 +181,30 @@ var renderAjouterCommentaire = function (req, res) {
 /*             ------------------------------------            */
 //---------------------------------------------------------------
 
+module.exports.actionAjouterCommentaire = function(req, res){
+};
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//---------------------------------------------------------------
+/*                     EXPERIMENTAL....                        */
+//---------------------------------------------------------------
 module.exports.ajoutEndroit = function(req, res) {
 	res.render('ajout-endroit', {
 		titre: 'ajout-endroit',
@@ -190,12 +213,6 @@ module.exports.ajoutEndroit = function(req, res) {
 		}
 	});
 };
-
-
-
-
-
-
 
 
 var renderEdit = function(req, res,responseBody){
