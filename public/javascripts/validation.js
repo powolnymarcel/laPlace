@@ -11,3 +11,4 @@ $('#ajoutCommentaire').submit(function (e) {
 	}
 });
 
+tinymce.init({ selector:'textarea' });
