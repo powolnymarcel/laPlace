@@ -25,6 +25,41 @@ var _montrerErreur = function (req, res, status) {
 
 
 //---------------------------------------------------------------
+/*          Fn pour les Recup les infos d'un endroit           */
+//---------------------------------------------------------------
+//Un appel est lancé sur l'api avec l'id de l'endroit voulu
+// La réponse est contenue dans la callback
+var getInfosEndroit = function (req, res, callback) {
+	var requestOptions, path;
+	path = "/api/endroits/" + req.params.endroitsid;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "GET",
+		json : {}
+	};
+	request(
+		requestOptions,
+		function(err, response, body) {
+			var data = body;
+			if (response.statusCode === 200) {
+				data.coords = {
+					lng : body.coords[0],
+					lat : body.coords[1]
+				};
+				callback(req, res, data);
+			} else {
+				_montrerErreur(req, res, response.statusCode);
+			}
+		}
+	);
+};
+//---------------------------------------------------------------
+/*             ------------------------------------            */
+//---------------------------------------------------------------
+
+
+
+//---------------------------------------------------------------
 /* Pour le midlleware REQUEST                                  */
 //---------------------------------------------------------------
 //Pour savoir si on travaille en local ou sur l'hebergeur
@@ -116,32 +151,21 @@ var renderDeLaPageAccueil = function(req, res,responseBody){
 //---------------------------------------------------------------
 /* GET pout la page infos detailless endroit*/
 module.exports.infoEndroit = function(req, res){
-	var requestOptions, path;
-	path = "/api/endroits/" + req.params.endroitsid;
-	requestOptions = {
-		url : apiOptions.server + path,
-		method : "GET",
-		json : {}
-	};
-	request(
-		requestOptions,
-		function(err, response, body) {
-			var data = body;
-			//Si l'endroit est trouve donc un code 200
-			if (response.statusCode === 200) {
-				data.coords = {
-					lng : body.coords[0],
-					lat : body.coords[1]
-				};
-				renderDeLaPageDetailsEndsroit(req, res,data);
-			} else {
-				//Sinon, afficher erreur en fonction du code erreur
-				_montrerErreur(req, res, response.statusCode);
-			}
-		}
-	);
+	//Cette fn ci dessous contient "req.params.endroitsid;" qui lui permet de faire un appel sur l'api et ainsi récup les infos de l'endroit
+	//La réponse est contenue dans "responseData", cette réponse est ensuite envoyée à la fn "renderDeLaPageDetailsEndsroit"
+	getInfosEndroit(req, res, function(req, res, responseData) {
+		console.log('*********************************************');
+		console.log('*********************************************');
+		console.log(responseData);
+		console.log('*********************************************');
+		console.log('*********************************************');
+		renderDeLaPageDetailsEndsroit(req, res, responseData);
+	});
 };
+
 /* RENDER page infos detailless endroit*/
+// Parametre "detailsEndroitUnique" = "responseData" de la fn "getInfosEndroit"
+// On envoire à JADE: un titre,headerDeLaPage, sidebar ET endroit qui est l'objet endroit(voir exemple ci dessous)
 var renderDeLaPageDetailsEndsroit = function (req, res,detailsEndroitUnique) {
 	res.render('info-endroit', {
 		titre: detailsEndroitUnique.nom,
@@ -155,6 +179,32 @@ var renderDeLaPageDetailsEndsroit = function (req, res,detailsEndroitUnique) {
 		endroit:detailsEndroitUnique
 	});
 };
+// -----------------   EXEMPLE --------------------------
+/*
+{ _id: '569aeae5c1a3d813479e6814',
+	nom: 'Carrefour',
+	adresse: 'Rue du commerce 743, 4444 LIEGE',
+	coords: { lng: 5.722622, lat: 50.626806 },
+	commentaires:
+		[ { auteur: 'Marie',
+			id: '569aeb3c85f250692df1f891',
+			note: 5,
+			texte: 'Magasin carrefour, je recommande',
+			temps: '2016-01-16T23:00:00.000Z' } ],
+			heuresOuverture:
+	[ { jours: 'Lundi - Vendredi',
+		ouverture: '7:00',
+		fermeture: '19:00',
+		ferme: false },
+		{ jours: 'Samedi',
+			ouverture: '8:00',
+			fermeture: '17:00',
+			ferme: false },
+		{ jours: 'Dimanche', ferme: true } ],
+		services: [ 'Poissons frais', 'Alcool', 'Charcuterie' ],
+	note: 5 }
+*/
+
 //---------------------------------------------------------------
 /*             ------------------------------------            */
 //---------------------------------------------------------------
@@ -165,16 +215,18 @@ var renderDeLaPageDetailsEndsroit = function (req, res,detailsEndroitUnique) {
 //---------------------------------------------------------------
 /* GET pout la page ajouter commentaire*/
 module.exports.ajouterCommentaire = function(req, res){
-	renderAjouterCommentaire(req, res);
+	getInfosEndroit(req, res, function(req, res, responseData) {
+		renderAjouterCommentaire(req, res, responseData);
+	});
 };
 
+
+
 /* RENDER pout la page ajouter commentaire*/
-var renderAjouterCommentaire = function (req, res) {
+var renderAjouterCommentaire = function (req, res, jeSuisLeCallbackContenantLesInfosEndroits) {
 	res.render('ajout-commentaire', {
-		titre: 'Ajouter commentaire sur l\'endroit',
-		headerDeLaPage: {
-			titre: 'Ajouter commentaire sur l\'endroit'
-		}
+		titre: 'Commentaire ' + jeSuisLeCallbackContenantLesInfosEndroits.nom + ' sur laPlace',
+		headerDeLaPage: { titre: 'Ajouter un commentaire sur ' + jeSuisLeCallbackContenantLesInfosEndroits.nom }
 	});
 };
 //---------------------------------------------------------------
@@ -183,7 +235,6 @@ var renderAjouterCommentaire = function (req, res) {
 
 module.exports.actionAjouterCommentaire = function(req, res){
 };
-
 
 
 
