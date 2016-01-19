@@ -226,7 +226,8 @@ module.exports.ajouterCommentaire = function(req, res){
 var renderAjouterCommentaire = function (req, res, jeSuisLeCallbackContenantLesInfosEndroits) {
 	res.render('ajout-commentaire', {
 		titre: 'Commentaire ' + jeSuisLeCallbackContenantLesInfosEndroits.nom + ' sur laPlace',
-		headerDeLaPage: { titre: 'Ajouter un commentaire sur ' + jeSuisLeCallbackContenantLesInfosEndroits.nom }
+		headerDeLaPage: { titre: 'Ajouter un commentaire sur ' + jeSuisLeCallbackContenantLesInfosEndroits.nom },
+		erreur: req.query.erreur
 	});
 };
 //---------------------------------------------------------------
@@ -234,12 +235,60 @@ var renderAjouterCommentaire = function (req, res, jeSuisLeCallbackContenantLesI
 //---------------------------------------------------------------
 
 module.exports.actionAjouterCommentaire = function(req, res){
+		var requestOptions, path, endroitsid, donneesProvennantDuFormulaireCommentaire;
+	endroitsid = req.params.endroitsid;
+		path = "/api/endroits/" + endroitsid + '/commentaires';
+		donneesProvennantDuFormulaireCommentaire = {
+			auteur: req.body.nom,
+			note: parseInt(req.body.note, 10),
+			texte: req.body.texte
+		};
+
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "POST",
+		json : donneesProvennantDuFormulaireCommentaire
+	};
+	//Avant l'appel API on verifie si des données sont présente
+	if (!donneesProvennantDuFormulaireCommentaire.auteur || !donneesProvennantDuFormulaireCommentaire.note || !donneesProvennantDuFormulaireCommentaire.texte) {
+		res.redirect('/endroits/' + endroitsid + '/commentaires/nouveau?erreur=val');
+	} else {
+		//Si les données sont présente on fait l'appel API, mongoose fera aussi sa vérification
+	request(
+		requestOptions,
+		function(err, response, body) {
+			if (response.statusCode === 201) {
+				res.redirect('/endroits/' + endroitsid);
+			}
+			//SI erreur 400, voir plus bas le type erreur mongoose
+			 else if (response.statusCode === 400 && body.name && body.name ===
+			"ValidationError" ) {
+				//On redirige vers la page du commentaire avec un parametre : erreur=val -- ce param sera affiché par la Fn "renderAjouterCommentaire" VOIR erreur: req.query.err
+			res.redirect('/endroits/' + endroitsid + '/commentaires/nouveau?erreur=val');
+			}
+			else {
+				_montrerErreur(req, res, response.statusCode);
+			}
+		}
+	);
+	};
 };
 
 
 
-
-
+//Erreur de provennant de mongoose qui indique que le path TEXTE est requis et que l'user n'a rien indiqué
+/*{
+	message: 'Validation failed',
+		name: 'ValidationError',
+	errors: {
+	'commentaires.1.texte': {
+		message: 'Path `texte` is required.',
+			name: 'ValidatorError',
+			path: 'texte',
+			type: 'required',
+			value: ''
+	}
+}*/
 
 
 

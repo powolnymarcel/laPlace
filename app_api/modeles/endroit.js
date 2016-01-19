@@ -12,9 +12,9 @@ var heuresOuvertureSchema = new mongoose.Schema({
 });
 
 var commentairesSchema = new mongoose.Schema({
-	auteur: String,
+	auteur: {type: String, required: true},
 	note: {type: Number, required: true, min: 0, max: 5},
-	texte: String,
+	texte: {type: String, required: true},
 	temps: {type: Date, "default": Date.now}
 });
 

@@ -24,7 +24,10 @@ router.get('/endroits/:endroitsid', ctrlEndroits.infoEndroit);
 router.get('/endroits/ajouter/ajout', ctrlEndroits.ajoutEndroit);
 router.get('/endroits/editer/:endroitsid', ctrlEndroits.editerEndroit);
 router.post('/endroits/editer/:endroitsid/fin', ctrlEndroits.editerEndroitFin);
-router.get('/endroit/:endroitsid/commentaires/nouveau', ctrlEndroits.ajouterCommentaire);
+//Au cas ou...
+router.get('/endroits/:endroitsid/commentaires', ctrlEndroits.infoEndroit);
+//**
+router.get('/endroits/:endroitsid/commentaires/nouveau', ctrlEndroits.ajouterCommentaire);
 router.post('/endroits/:endroitsid/commentaires/nouveau', ctrlEndroits.actionAjouterCommentaire);
 
 /**
