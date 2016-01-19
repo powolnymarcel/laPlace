@@ -1,7 +1,9 @@
 //Pour permettre à ce controlleur de faire des appels sur l'API
 var request = require('request');
 
-
+//---------------------------------------------------------------
+/*          Fn pour les erreurs                                */
+//---------------------------------------------------------------
 var _montrerErreur = function (req, res, status) {
 	var titre, contenu;
 	if (status === 404) {
@@ -17,53 +19,35 @@ var _montrerErreur = function (req, res, status) {
 		contenu : contenu
 	});
 };
+//---------------------------------------------------------------
+/*             ------------------------------------            */
+//---------------------------------------------------------------
 
 
-
-
+//---------------------------------------------------------------
+/* Pour le midlleware REQUEST                                  */
+//---------------------------------------------------------------
 //Pour savoir si on travaille en local ou sur l'hebergeur
 var apiOptions = {
 	server : "http://localhost:3000"
 };
 if (process.env.NODE_ENV === 'production') {
-	apiOptions.server = "https://sleepy-waters-7506.herokuapp.com/";
+	apiOptions.server = "https://sleepy-waters-7506.herokuapp.com";
 }
+//---------------------------------------------------------------
+/*             ------------------------------------            */
+//---------------------------------------------------------------
 
 
 //---------------------------------------------------------------
 /* Render pour la page d'accueil                               */
 //---------------------------------------------------------------
-
-var renderDeLaPageAccueil = function(req, res,responseBody){
-	var message;
-	//Si la réponse est différente d'un array
-	if (!(responseBody instanceof Array)) {
-		message = "Erreur lors de la verif sur l'API";
-		//Pourquoi un array vide ? Si la vue reçoit à la place un STRING elle va peter un cable :p, il est tard...
-		responseBody = [];
-	} else {
-		//Si pas d'endroits trouvé
-		if (!responseBody.length) {
-			message = "Aucuns endroits trouves...";
-		}
-	}
-	res.render('liste-accueil-endroits', {
-		titre: 'laPlace, trouver des commerces proche de chez vous.',
-		headerDeLaPage: {
-			titre: 'laPlace',
-			tagLine: 'Trouver des commerces proche de chez vous.'
-		},
-		sidebar: "laPlace, trouver des commerces proche de chez vous............SIDEBAR",
-		endroits: responseBody,
-		message: message
-	});
-};
-
+/* GET pour la page d'accueil */
 //Va faire un appel GET sur le routeur de l'api, le routeur de l'api va donc recevoir : GET /api/endroits
 //Pour le routeur cela signifie qu'il faut aller dans le Ctrl "ctrlEndroits" et lancer "endroitsListeParDistance"
 module.exports.listingAccueilEndroits = function(req, res){
 	var requestOptions, path;
-	path = 'api/endroits';
+	path = '/api/endroits';
 	requestOptions = {
 		url : apiOptions.server + path,
 		method : "GET",
@@ -97,12 +81,67 @@ module.exports.listingAccueilEndroits = function(req, res){
 		return numDistance + unit;
 	};
 };
+/* RENDER  pour la page d'accueil */
+var renderDeLaPageAccueil = function(req, res,responseBody){
+	var message;
+	//Si la réponse est différente d'un array
+	if (!(responseBody instanceof Array)) {
+		message = "Erreur lors de la verif sur l'API";
+		//Pourquoi un array vide ? Si la vue reçoit à la place un STRING elle va peter un cable :p, il est tard...
+		responseBody = [];
+	} else {
+		//Si pas d'endroits trouvé
+		if (!responseBody.length) {
+			message = "Aucuns endroits trouves...";
+		}
+	}
+	res.render('liste-accueil-endroits', {
+		titre: 'laPlace, trouver des commerces proche de chez vous.',
+		headerDeLaPage: {
+			titre: 'laPlace',
+			tagLine: 'Trouver des commerces proche de chez vous.'
+		},
+		sidebar: "La distance est calculée à partir d'un point donné sur Soumagne",
+		endroits: responseBody,
+		message: message
+	});
+};
+//---------------------------------------------------------------
+/*             ------------------------------------            */
+//---------------------------------------------------------------
 
 
 //---------------------------------------------------------------
 /* Render pour la page information detaillées sur l'endroit    */
 //---------------------------------------------------------------
-
+/* GET pout la page infos detailless endroit*/
+module.exports.infoEndroit = function(req, res){
+	var requestOptions, path;
+	path = "/api/endroits/" + req.params.endroitsid;
+	requestOptions = {
+		url : apiOptions.server + path,
+		method : "GET",
+		json : {}
+	};
+	request(
+		requestOptions,
+		function(err, response, body) {
+			var data = body;
+			//Si l'endroit est trouve donc un code 200
+			if (response.statusCode === 200) {
+				data.coords = {
+					lng : body.coords[0],
+					lat : body.coords[1]
+				};
+				renderDeLaPageDetailsEndsroit(req, res,data);
+			} else {
+				//Sinon, afficher erreur en fonction du code erreur
+				_montrerErreur(req, res, response.statusCode);
+			}
+		}
+	);
+};
+/* RENDER page infos detailless endroit*/
 var renderDeLaPageDetailsEndsroit = function (req, res,detailsEndroitUnique) {
 	res.render('info-endroit', {
 		titre: detailsEndroitUnique.nom,
@@ -116,44 +155,31 @@ var renderDeLaPageDetailsEndsroit = function (req, res,detailsEndroitUnique) {
 		endroit:detailsEndroitUnique
 	});
 };
-module.exports.infoEndroit = function(req, res){
-	var requestOptions, path;
-	path = "api/endroits/" + req.params.endroitsid;
-	requestOptions = {
-		url : apiOptions.server + path,
-		method : "GET",
-		json : {}
-	};
-	request(
-		requestOptions,
-		function(err, response, body) {
-			var data = body;
-			//Si l'endroit est trouve donc un code 200
-			if (response.statusCode === 200) {
-			data.coords = {
-				lng : body.coords[0],
-				lat : body.coords[1]
-			};
-			renderDeLaPageDetailsEndsroit(req, res,data);
-			} else {
-				//Sinon, afficher erreur en fonction du code erreur
-				_montrerErreur(req, res, response.statusCode);
-			}
-		}
-	);
-};
+//---------------------------------------------------------------
+/*             ------------------------------------            */
+//---------------------------------------------------------------
+
 
 //---------------------------------------------------------------
 /* Render pour la page ajouter un commentaire                   */
 //---------------------------------------------------------------
-module.exports.ajouterCommentaire = function(req, res) {
+/* GET pout la page ajouter commentaire*/
+module.exports.ajouterCommentaire = function(req, res){
+	renderAjouterCommentaire(req, res);
+};
+
+/* RENDER pout la page ajouter commentaire*/
+var renderAjouterCommentaire = function (req, res) {
 	res.render('ajout-commentaire', {
-		titre: 'ajout-commentaire sur l\'endroit,',
+		titre: 'Ajouter commentaire sur l\'endroit',
 		headerDeLaPage: {
-			titre: 'ajout-commentaire sur l\'endroit'
+			titre: 'Ajouter commentaire sur l\'endroit'
 		}
 	});
 };
+//---------------------------------------------------------------
+/*             ------------------------------------            */
+//---------------------------------------------------------------
 
 
 module.exports.ajoutEndroit = function(req, res) {
@@ -163,7 +189,7 @@ module.exports.ajoutEndroit = function(req, res) {
 			titre: 'ajout endroit'
 		}
 	});
-}
+};
 
 
 
@@ -180,7 +206,7 @@ var renderEdit = function(req, res,responseBody){
 };
 module.exports.editerEndroit = function(req, res) {
 	var requestOptions, path;
-	path = "api/endroits/" + req.params.endroitsid;
+	path = "/api/endroits/" + req.params.endroitsid;
 	requestOptions = {
 		url : apiOptions.server + path,
 		method : "GET",
@@ -194,7 +220,7 @@ module.exports.editerEndroit = function(req, res) {
 
 		}
 	);
-}
+};
 
 
 
@@ -207,7 +233,7 @@ var renderEditFin = function(req, res,responseBody){
 module.exports.editerEndroitFin = function(req, res) {
 
 	var requestOptions, path;
-	path = "api/endroits/" + req.params.endroitsid;
+	path = "/api/endroits/" + req.params.endroitsid;
 	requestOptions = {
 		url : apiOptions.server + path,
 		method : "PUT",
@@ -221,4 +247,4 @@ module.exports.editerEndroitFin = function(req, res) {
 
 		}
 	);
-}
+};

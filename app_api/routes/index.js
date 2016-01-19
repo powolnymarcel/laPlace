@@ -23,3 +23,5 @@ router.get('/endroits/:endroitsid/commentaires/:commentairesid', ctrlCommentaire
 router.put('/endroits/:endroitsid/commentaires/:commentairesid', ctrlCommentaires.commentaireUpdate);
 router.delete('/endroits/:endroitsid/commentaires/:commentairesid', ctrlCommentaires.commentaireDelete);
 module.exports = router;
+
+

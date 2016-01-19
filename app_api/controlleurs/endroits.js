@@ -23,7 +23,7 @@ var theEarth = (function(){
 //---------------------------------------------------------------
 /*              Fn pour le status + message                    */
 //---------------------------------------------------------------
-// Permet d'envoyer le code de status et un message
+// Permet d'envoyer le code de status, un message et le contenu en JSON
 var sendJsonResponse = function(res, status, content) {
 	res.status(status);
 	res.json(content);

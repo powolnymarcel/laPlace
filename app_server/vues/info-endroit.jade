@@ -43,7 +43,7 @@ block content
 				.col-xs-12
 					.panel.panel-primary.review-panel
 						.panel-heading
-							a.btn.btn-default.pull-right(href="/endroit/commentaire/nouveau") Ajouter un commentaire
+							a.btn.btn-default.pull-right(href="/endroit/#{endroit._id}/commentaires/nouveau") Ajouter un commentaire
 							h2.panel-title Commentaires clients
 						.panel-body.review-container
 							each commentaire in endroit.commentaires
